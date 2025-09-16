@@ -76,7 +76,7 @@ plt.title('Análise de Resíduos')
 plt.show()
 
 # -------------------------------------------------------------------
-# Questão (a, b, c) – Cenário com intercepto forçado a zero
+# Questão (a, b, c) – Cenário com intercepto forçado a 0
 # -------------------------------------------------------------------
 X_no_intercept = X[:,1:]  # remove a coluna de 1s
 beta_no_intercept = np.linalg.inv(X_no_intercept.T @ X_no_intercept) @ (X_no_intercept.T @ y)

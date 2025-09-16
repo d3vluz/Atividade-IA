@@ -41,9 +41,17 @@ print('Coeficientes (β):')
 print(beta.flatten())
 print()
 
-# -------------------------------------------------------------------
-# Questão (b) – Previsão para um caso específico
-# -------------------------------------------------------------------
+"""
+------------------------------------------------------------------------------------
+Questão (b) – Use o modelo para prever o arênio nas unhas, quando a idade for 30, a
+categoria da água para beber for 5, a categoria da água para cozinhar for 5 e o ar-
+sénio na água for 0.135 ppm.
+------------------------------------------------------------------------------------
+    > Para fazer a previsão, basta multiplicar os valores dos regressores pelo vetor
+      de coeficientes (β) obtido anteriormente.
+------------------------------------------------------------------------------------
+"""
+
 entrada = np.array([1, 30, 5, 5, 0.135])  # 1 para o intercepto
 predicao = entrada @ beta
 print('Previsão (arsênio na unha):', predicao.item())

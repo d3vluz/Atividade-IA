@@ -15,18 +15,26 @@ print()
 
 # Seleção das variáveis
 X = df[['Idade', 'Uso_Beber', 'Uso_Cozinhar', 'Arsenio_Agua']].values
-y = df['Arsenio_Unhas'].values
+Y = df['Arsenio_Unhas'].values
 
 # Adiciona o termo de intercepto (coluna de 1s)
 X = np.c_[np.ones(X.shape[0]), X]
-y = y.reshape(-1, 1)
+Y = Y.reshape(-1, 1)
 
-# -------------------------------------------------------------------
-# Questão (a) – Ajuste do modelo de regressão linear múltipla
-# -------------------------------------------------------------------
+"""
+------------------------------------------------------------------------------------
+Questão (a) – Ajuste do modelo de regressão linear múltipla usando a concentração de 
+arsênio nas unhas como a resposta, e idade, uso para beber, uso para cozinhar e con-
+centração de arsênio na água como os regressores.
+------------------------------------------------------------------------------------
+    > Para resolução desse problema foi necessário utilizar a fórmula dos mínimos
+      quadrados: β = (XᵀX)⁻¹XᵀY
+------------------------------------------------------------------------------------
+"""
+
 XtX = X.T @ X
 XtX_inv = np.linalg.inv(XtX)
-XtY = X.T @ y
+XtY = X.T @ Y
 beta = XtX_inv @ XtY
 
 print('Coeficientes (β):')
@@ -47,8 +55,8 @@ print()
 y_pred = X @ beta
 
 # (d) R² e R² ajustado
-SS_res = np.sum((y - y_pred)**2)
-SS_tot = np.sum((y - np.mean(y))**2)
+SS_res = np.sum((Y - y_pred)**2)
+SS_tot = np.sum((Y - np.mean(Y))**2)
 R2 = 1 - (SS_res/SS_tot)
 
 n = X.shape[0]
@@ -60,9 +68,9 @@ print('R² ajustado:', R2_adj)
 print()
 
 # (f) Análise de resíduos
-residuos = y - y_pred
+residuos = Y - y_pred
 tabela = pd.DataFrame({
-    'Real': y.flatten(),
+    'Real': Y.flatten(),
     'Previsto': y_pred.flatten(),
     'Residuo': residuos.flatten()
 })
@@ -80,10 +88,10 @@ plt.show()
 # Questão (a, b, c) – Cenário com intercepto forçado a 0
 # -------------------------------------------------------------------
 X_no_intercept = X[:,1:]  # remove a coluna de 1s
-beta_no_intercept = np.linalg.inv(X_no_intercept.T @ X_no_intercept) @ (X_no_intercept.T @ y)
+beta_no_intercept = np.linalg.inv(X_no_intercept.T @ X_no_intercept) @ (X_no_intercept.T @ Y)
 y_pred_no_intercept = X_no_intercept @ beta_no_intercept
 
-SS_res2 = np.sum((y - y_pred_no_intercept)**2)
+SS_res2 = np.sum((Y - y_pred_no_intercept)**2)
 R2_no_intercept = 1 - SS_res2/SS_tot
 
 print('R² sem intercepto:', R2_no_intercept)
@@ -92,9 +100,9 @@ print()
 # -------------------------------------------------------------------
 # Questão (g, h) – Métricas de erro
 # -------------------------------------------------------------------
-MSE = np.mean((y - y_pred) ** 2)
+MSE = np.mean((Y - y_pred) ** 2)
 RMSE = np.sqrt(MSE)
-MAE = np.mean(np.abs(y - y_pred))
+MAE = np.mean(np.abs(Y - y_pred))
 
 print('Métricas de erro:')
 print(f'  MSE: {MSE:.4f}')

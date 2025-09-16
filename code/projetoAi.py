@@ -1,11 +1,12 @@
 import numpy as np
 import pandas as pd
+from pathlib import Path
 import matplotlib.pyplot as plt
 
 # -------------------------------------------------------------------
 # Leitura do dataset
 # -------------------------------------------------------------------
-df = pd.read_csv('/Users/matheuscorreia/Documents/Unifor/Inteligencia Artifical/Projeto AI/Codigo Projeto AI/arsenio_dataset.csv')
+df = pd.read_csv(Path(__file__).resolve().parent.parent / "dataset" / "arsenio_dataset.csv")
 
 print(df.head())  # Mostra as primeiras linhas
 print()

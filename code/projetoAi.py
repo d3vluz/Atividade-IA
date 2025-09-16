@@ -23,7 +23,7 @@ Y = Y.reshape(-1, 1)
 
 """
 ------------------------------------------------------------------------------------
-Questão (a) – Ajuste do modelo de regressão linear múltipla usando a concentração de 
+Questão (a) Ajuste do modelo de regressão linear múltipla usando a concentração de 
 arsênio nas unhas como a resposta, e idade, uso para beber, uso para cozinhar e con-
 centração de arsênio na água como os regressores.
 ------------------------------------------------------------------------------------
@@ -43,7 +43,7 @@ print()
 
 """
 ------------------------------------------------------------------------------------
-Questão (b) – Use o modelo para prever o arênio nas unhas, quando a idade for 30, a
+Questão (b) Use o modelo para prever o arênio nas unhas, quando a idade for 30, a
 categoria da água para beber for 5, a categoria da água para cozinhar for 5 e o ar-
 sénio na água for 0.135 ppm.
 ------------------------------------------------------------------------------------
@@ -57,23 +57,51 @@ predicao = entrada @ beta
 print('Previsão (arsênio na unha):', predicao.item())
 print()
 
-# -------------------------------------------------------------------
-# Questão (c, d, e, f) – Avaliação do modelo
-# -------------------------------------------------------------------
+
+"""
+------------------------------------------------------------------------------------
+Questão (c) Cálculo do coeficiente de determinação (R²) do modelo
+------------------------------------------------------------------------------------
+    > O coeficiente de determinação R². Ele é calculado por:
+        R² = 1 - (SS_res / SS_tot)
+      onde:
+        - SS_res: soma dos quadrados dos resíduos 
+        - SS_tot: soma total dos quadrados
+        
+      Valores de R² próximos de 1 indicam bom ajuste do modelo.
+------------------------------------------------------------------------------------
+"""
 y_pred = X @ beta
 
-# (d) R² e R² ajustado
 SS_res = np.sum((Y - y_pred)**2)
 SS_tot = np.sum((Y - np.mean(Y))**2)
 R2 = 1 - (SS_res/SS_tot)
 
+print('R²:', R2)
+
+"""
+------------------------------------------------------------------------------------
+Questão (d) Muitos usuários de regressão preferem usar a estatística do valor aju-
+stado de R². Por quê? Ela foi melhor que o R² comum? Se sim, por quê?
+------------------------------------------------------------------------------------
+  > O R² ajustado é preferido porque leva em consideração o número de variáveis (re-
+  gressores) do modelo e penaliza a inclusão de variáveis irrelevantes. Enquanto o R²
+  comum sempre aumenta (ou permanece igual) com a adição de novos regressores, o R² 
+  ajustado só aumenta se a nova variável realmente contribuir para explicar a varia-
+  bilidade da resposta. Assim, o R² ajustado é uma métrica mais realista para compa-
+  rar modelos com diferentes números de variáveis.
+  
+  > No modelo estudado, o valor do R² ajustado foi ligeiramente menor que o R² comum,
+  o que é esperado, pois ele corrige o otimismo do R² simples. Se o R² ajustado for 
+  significativamente menor que o R², pode indicar que há variáveis desnecessárias no
+  modelo.
+------------------------------------------------------------------------------------
+"""
 n = X.shape[0]
 p = X.shape[1] - 1
 R2_adj = 1 - (1-R2)*(n-1)/(n-p-1)
 
-print('R²:', R2)
 print('R² ajustado:', R2_adj)
-print()
 
 # (f) Análise de resíduos
 residuos = Y - y_pred

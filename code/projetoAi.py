@@ -3,23 +3,18 @@ import pandas as pd
 from pathlib import Path
 import matplotlib.pyplot as plt
 
-# -------------------------------------------------------------------
-# Leitura do dataset
-# -------------------------------------------------------------------
 df = pd.read_csv(Path(__file__).resolve().parent.parent / "dataset" / "arsenio_dataset.csv")
 
-print(df.head())  # Mostra as primeiras linhas
-print()
-print(df.info())  # Mostra informações do DataFrame
-print()
+# print(df.head())
+# print(df.info())
 
-# Seleção das variáveis
 X = df[['Idade', 'Uso_Beber', 'Uso_Cozinhar', 'Arsenio_Agua']].values
 Y = df['Arsenio_Unhas'].values
 
 # Adiciona o termo de intercepto (coluna de 1s)
 X = np.c_[np.ones(X.shape[0]), X]
 Y = Y.reshape(-1, 1)
+organizacao_console = 70*'-'
 
 """
 ------------------------------------------------------------------------------------
@@ -37,9 +32,9 @@ XtX_inv = np.linalg.inv(XtX)
 XtY = X.T @ Y
 beta = XtX_inv @ XtY
 
+print(organizacao_console)
 print('Coeficientes (β):')
 print(beta.flatten())
-print()
 
 """
 ------------------------------------------------------------------------------------
@@ -54,9 +49,9 @@ sénio na água for 0.135 ppm.
 
 entrada = np.array([1, 30, 5, 5, 0.135])  # 1 para o intercepto
 predicao = entrada @ beta
-print('Previsão (arsênio na unha):', predicao.item())
-print()
 
+print(organizacao_console)
+print('Previsão (arsênio na unha):', predicao.item())
 
 """
 ------------------------------------------------------------------------------------
@@ -77,6 +72,7 @@ SS_res = np.sum((Y - y_pred)**2)
 SS_tot = np.sum((Y - np.mean(Y))**2)
 R2 = 1 - (SS_res/SS_tot)
 
+print(organizacao_console)
 print('R²:', R2)
 
 """
@@ -101,6 +97,7 @@ n = X.shape[0]
 p = X.shape[1] - 1
 R2_adj = 1 - (1-R2)*(n-1)/(n-p-1)
 
+print(organizacao_console)
 print('R² ajustado:', R2_adj)
 
 # (f) Análise de resíduos

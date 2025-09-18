@@ -126,23 +126,45 @@ print(' - Coeficientes (β):', beta_alt.flatten())
 print(' - R²:', R2_alt)
 print(' - R² ajustado:', R2_adj_alt)
 
+"""
+------------------------------------------------------------------------------------
+Questão (f) Realize uma análise de resíduos para verificar as suposições do modelo 
+de regressão. Para isso, siga os seguintes passos:
 
-# (f) Análise de resíduos
+    I. Calcule os valores ajustados para todas as observações de y:
+    II. Calcule os resíduos correspondentes:
+    III. Organize os resultados em uma tabela mostrando, para cada observação.
+------------------------------------------------------------------------------------
+  > A análise de resíduos é fundamental para verificar as suposições do modelo de re-
+  gressão linear, como a normalidade dos resíduos, homocedasticidade (variância con-
+  stante) e independência dos erros. A seguir, realizamos essa análise.
+------------------------------------------------------------------------------------
+"""
+
+# I. Calcule os valores ajustados para todas as observações de y:
+y_pred = X @ beta
+
+# II. Calcule os resíduos correspondentes:
 residuos = Y - y_pred
-tabela = pd.DataFrame({
-    'Real': Y.flatten(),
-    'Previsto': y_pred.flatten(),
-    'Residuo': residuos.flatten()
-})
-print(tabela.head())
-print()
 
-plt.scatter(y_pred, residuos)
-plt.axhline(0, color='red', linestyle='--')
-plt.xlabel('Valores Previstos')
-plt.ylabel('Resíduos')
-plt.title('Análise de Resíduos')
-plt.show()
+# III. Organize os resultados em uma tabela mostrando, para cada observação.
+tabela = pd.DataFrame({
+    'Índice': np.arange(1, len(Y)+1),
+    'Valor Observado': Y.flatten(),
+    'Valor Ajustado': y_pred.flatten(),
+    'Resíduo': residuos.flatten()
+})
+
+print(organizacao_console)
+print(tabela.head())
+
+# @TODO:revisar isso, não entendi isso, commit do @matheusperestrelo
+# plt.scatter(y_pred, residuos)
+# plt.axhline(0, color='red', linestyle='--')
+# plt.xlabel('Valores Previstos')
+# plt.ylabel('Resíduos')
+# plt.title('Análise de Resíduos')
+# plt.show()
 
 # -------------------------------------------------------------------
 # Questão (a, b, c) – Cenário com intercepto forçado a 0

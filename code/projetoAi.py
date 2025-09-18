@@ -192,30 +192,41 @@ y_pred_no_intercept = X_no_intercept @ beta_no_intercept
 SS_res2 = np.sum((Y - y_pred_no_intercept)**2)
 R2_no_intercept = 1 - SS_res2/SS_tot
 
+MSE_normal = np.mean((Y - y_pred) ** 2)
+RMSE_normal = np.sqrt(MSE_normal)
+
 MSE_no_intercept = np.mean((Y - y_pred_no_intercept) ** 2)
 RMSE_no_intercept = np.sqrt(MSE_no_intercept)
 
 print(organizacao_console)
 print('Comparação com o modelo com intercepto:')
 print(f' - R² com intercepto: {R2}, R² sem intercepto: {R2_no_intercept}')
-print(f' - RMSE com intercepto: {np.sqrt(np.mean((Y - y_pred) ** 2))}, RMSE sem intercepto: {RMSE_no_intercept}')
+print(f' - RMSE com intercepto: {RMSE_normal}, RMSE sem intercepto: {RMSE_no_intercept}')
 
-# -------------------------------------------------------------------
-# Questão (g, h) – Métricas de erro
-# -------------------------------------------------------------------
-MSE = np.mean((Y - y_pred) ** 2)
-RMSE = np.sqrt(MSE)
-MAE = np.mean(np.abs(Y - y_pred))
+"""
+------------------------------------------------------------------------------------
+Questão (h) Além do R²: Calcule e interprete pelo menos outras duas métricas de erro
+para o modelo completo e para o modelo alternativo (apenas com Arsênio na água). 
 
-print('Métricas de erro:')
-print(f'  MSE: {MSE:.4f}')
-print(f'  RMSE: {RMSE:.4f}')
-print(f'  MAE: {MAE:.4f}')
+Sugestões: Erro Quadrático Médio (MSE), Raiz do Erro Quadrático Médio (RMSE) e 
+Erro Absoluto Médio (MAE).
+------------------------------------------------------------------------------------
+  > As métricas adicionais fornecem uma visão mais completa do desempenho do modelo.
+  O MSE penaliza mais os erros maiores, o RMSE traz a penalização para a mesma uni-
+  dade da variável resposta, e o MAE dá uma medida direta do erro médio absoluto.
+  
+  > Comparando essas métricas entre o modelo completo e o modelo alternativo, podemos
+  avaliar qual modelo tem um desempenho melhor em termos de precisão das previsões.
+------------------------------------------------------------------------------------
+"""
+MAE_normal = np.mean(np.abs(Y - y_pred))
 
-# Cálculo das métricas para o modelo sem intercepto
-MAE_no_intercept = np.mean(np.abs(Y - y_pred_no_intercept))
+MSE_alt = np.mean((Y - y_pred_alt) ** 2)
+RMSE_alt = np.sqrt(MSE_alt)
+MAE_alt = np.mean(np.abs(Y - y_pred_alt))
 
-print('Métricas de erro (sem intercepto):')
-print(f'  MSE: {MSE_no_intercept:.4f}')
-print(f'  RMSE: {RMSE_no_intercept:.4f}')
-print(f'  MAE: {MAE_no_intercept:.4f}')
+print(organizacao_console)
+print('[Comparação de métricas adicionais]')
+print(f'Modelo completo: \n- MSE: {MSE_normal} \n- RMSE: {RMSE_normal} \n- MAE: {MAE_normal}')
+print(f'Modelo alternativo: \n- MSE: {MSE_alt} \n- RMSE: {RMSE_alt} \n- MAE: {MAE_alt}')
+print(organizacao_console)

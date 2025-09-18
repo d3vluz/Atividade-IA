@@ -166,9 +166,25 @@ print(tabela.head())
 # plt.title('Análise de Resíduos')
 # plt.show()
 
-# -------------------------------------------------------------------
-# Questão (a, b, c) – Cenário com intercepto forçado a 0
-# -------------------------------------------------------------------
+"""
+------------------------------------------------------------------------------------
+Questão (g) Cenário com Intercepto Forçado a Zero: Suponha que, por razões teóricas,
+você imponha a restrição de que o intercepto deve ser zero. Qual é a interpretação 
+prática dessa decisão? Compare as métricas R² e RMSE deste modelo com o modelo com 
+intercepto. Qual você escolheria e por quê?
+------------------------------------------------------------------------------------
+  > Forçar o intercepto a ser zero implica que quando todas as variáveis independen-
+  tes são zero, a variável dependente também deve ser zero. Na prática, isso pode 
+  não fazer sentido, especialmente se o ponto onde todas as variáveis independentes 
+  são zero não for realista ou relevante para o contexto do problema. Por exemplo, 
+  no caso do arsênio nas unhas, ter idade zero e não usar água para beber ou cozi-
+  nhar pode não ser uma situação plausível.
+  
+  > Comparando as métricas R² e RMSE do modelo com intercepto e do modelo sem inter-
+  cepto, geralmente o modelo com intercepto tende a ter um ajuste melhor (maior R²
+  e menor RMSE), pois ele tem mais flexibilidade para se ajustar aos dados.
+------------------------------------------------------------------------------------
+"""
 X_no_intercept = X[:,1:]  # remove a coluna de 1s
 beta_no_intercept = np.linalg.inv(X_no_intercept.T @ X_no_intercept) @ (X_no_intercept.T @ Y)
 y_pred_no_intercept = X_no_intercept @ beta_no_intercept
@@ -176,8 +192,13 @@ y_pred_no_intercept = X_no_intercept @ beta_no_intercept
 SS_res2 = np.sum((Y - y_pred_no_intercept)**2)
 R2_no_intercept = 1 - SS_res2/SS_tot
 
-print('R² sem intercepto:', R2_no_intercept)
-print()
+MSE_no_intercept = np.mean((Y - y_pred_no_intercept) ** 2)
+RMSE_no_intercept = np.sqrt(MSE_no_intercept)
+
+print(organizacao_console)
+print('Comparação com o modelo com intercepto:')
+print(f' - R² com intercepto: {R2}, R² sem intercepto: {R2_no_intercept}')
+print(f' - RMSE com intercepto: {np.sqrt(np.mean((Y - y_pred) ** 2))}, RMSE sem intercepto: {RMSE_no_intercept}')
 
 # -------------------------------------------------------------------
 # Questão (g, h) – Métricas de erro
@@ -190,3 +211,11 @@ print('Métricas de erro:')
 print(f'  MSE: {MSE:.4f}')
 print(f'  RMSE: {RMSE:.4f}')
 print(f'  MAE: {MAE:.4f}')
+
+# Cálculo das métricas para o modelo sem intercepto
+MAE_no_intercept = np.mean(np.abs(Y - y_pred_no_intercept))
+
+print('Métricas de erro (sem intercepto):')
+print(f'  MSE: {MSE_no_intercept:.4f}')
+print(f'  RMSE: {RMSE_no_intercept:.4f}')
+print(f'  MAE: {MAE_no_intercept:.4f}')

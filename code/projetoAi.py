@@ -100,6 +100,33 @@ R2_adj = 1 - (1-R2)*(n-1)/(n-p-1)
 print(organizacao_console)
 print('R² ajustado:', R2_adj)
 
+"""
+------------------------------------------------------------------------------------
+Questão (e) Compare este modelo com um modelo alternativo que use apenas a concen-
+traçao de arsênio na  ́agua como preditor. Qual modelo  ́e melhor? Por que?
+------------------------------------------------------------------------------------
+  > Para comparar os modelos, podemos ajustar um segundo modelo usando apenas a
+  concentração de arsênio na água como preditor e calcular o R² e o R² ajustado.
+------------------------------------------------------------------------------------
+"""
+X_alt = df[['Arsenio_Agua']].values
+X_alt = np.c_[np.ones(X_alt.shape[0]), X_alt]
+
+beta_alt = np.linalg.inv(X_alt.T @ X_alt) @ (X_alt.T @ Y)
+
+y_pred_alt = X_alt @ beta_alt
+SS_res_alt = np.sum((Y - y_pred_alt)**2)
+
+R2_alt = 1 - SS_res_alt/SS_tot
+R2_adj_alt = 1 - (1-R2_alt)*(n-1)/(n-1-1)
+
+print(organizacao_console)
+print('Modelo alternativo (apenas arsênio na água):')
+print(' - Coeficientes (β):', beta_alt.flatten())
+print(' - R²:', R2_alt)
+print(' - R² ajustado:', R2_adj_alt)
+
+
 # (f) Análise de resíduos
 residuos = Y - y_pred
 tabela = pd.DataFrame({

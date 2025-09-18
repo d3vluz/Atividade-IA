@@ -1,7 +1,7 @@
 
 ## Projeto: Análise de Regressão Linear - Arsênio em Unhas
 
-Trabalho referente a cadeira Inteligência Artificial Computacional (T296-60)
+Este projeto realiza uma análise de regressão linear múltipla para investigar fatores associados à concentração de arsênio nas unhas, utilizando dados fornecidos. O trabalho foi desenvolvido para a disciplina de Inteligência Artificial Computacional (T296-60).
 
 ### Estrutura do Projeto
 
@@ -34,15 +34,16 @@ python code/projetoAi.py
 
 O script irá:
 - Ler o dataset
-- Ajustar o modelo de regressão linear múltipla
-- Exibir os coeficientes, métricas de ajuste e análise de resíduos
-- Gerar um gráfico de resíduos
+- Ajustar modelos de regressão linear múltipla e simples
+- Exibir coeficientes, métricas de ajuste (R², R² ajustado, MSE, RMSE, MAE)
+- Realizar análise de resíduos
+- Comparar modelos com e sem intercepto
 
 ### Equipe
 
 | Nome             | Matrícula |
 |------------------|-----------|
 | Evandro Luz      | 2220294   |
-| Matheus Correia  |           |
-| Augusto Soares   |           |
-| Marcello Miranda |           |
+| Matheus Correia  | 2224701   |
+| Augusto Soares   | 1710558   |
+| Marcello Miranda | 2210732   |

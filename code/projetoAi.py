@@ -1,8 +1,10 @@
+# %%
 import numpy as np
 import pandas as pd
 from pathlib import Path
 
 df = pd.read_csv(Path(__file__).resolve().parent.parent / "dataset" / "arsenio_dataset.csv")
+df
 
 # print(df.head())
 # print(df.info())
@@ -223,3 +225,4 @@ print('[Comparação de métricas adicionais]')
 print(f'Modelo completo: \n- MSE: {MSE_normal} \n- RMSE: {RMSE_normal} \n- MAE: {MAE_normal}')
 print(f'Modelo alternativo: \n- MSE: {MSE_alt} \n- RMSE: {RMSE_alt} \n- MAE: {MAE_alt}')
 print(organizacao_console)
+# %%

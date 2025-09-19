@@ -45,5 +45,3 @@ O script irá:
 |------------------|-----------|
 | Evandro Luz      | 2220294   |
 | Matheus Correia  | 2224701   |
-| Augusto Soares   | 1710558   |
-| Marcello Miranda | 2210732   |

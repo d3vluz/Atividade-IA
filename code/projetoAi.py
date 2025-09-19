@@ -1,7 +1,6 @@
 import numpy as np
 import pandas as pd
 from pathlib import Path
-import matplotlib.pyplot as plt
 
 df = pd.read_csv(Path(__file__).resolve().parent.parent / "dataset" / "arsenio_dataset.csv")
 
@@ -34,11 +33,13 @@ beta = XtX_inv @ XtY
 
 print(organizacao_console)
 print('Coeficientes (β):')
-print(beta.flatten())
+nomes = ['Intercepto', 'Idade', 'Uso_Beber', 'Uso_Cozinhar', 'Arsenio_Agua']
+for nome, valor in zip(nomes, beta.flatten()):
+    print(f'{nome}: {valor}')
 
 """
 ------------------------------------------------------------------------------------
-Questão (b) Use o modelo para prever o arênio nas unhas, quando a idade for 30, a
+Questão (b) Use o modelo para prever o arsênio nas unhas, quando a idade for 30, a
 categoria da água para beber for 5, a categoria da água para cozinhar for 5 e o ar-
 sénio na água for 0.135 ppm.
 ------------------------------------------------------------------------------------
@@ -157,14 +158,6 @@ tabela = pd.DataFrame({
 
 print(organizacao_console)
 print(tabela.head())
-
-# @TODO:revisar isso, não entendi isso, commit do @matheusperestrelo
-# plt.scatter(y_pred, residuos)
-# plt.axhline(0, color='red', linestyle='--')
-# plt.xlabel('Valores Previstos')
-# plt.ylabel('Resíduos')
-# plt.title('Análise de Resíduos')
-# plt.show()
 
 """
 ------------------------------------------------------------------------------------
